@@ -46,10 +46,30 @@
     <main class="main-content">
       <section class="container">
         <div class="row py-4">
-          <div class="card col-lg-7">
+          <div class="card rounded col-lg-7">
             <form id="formulario-calculadora">
               <fieldset>
                 <legend class="h2 text-center">Calculadora de Calorías</legend>
+                <div class="mb-3">
+                  <label for="nombre" class="form-label h6">Nombre</label>
+                  <input type="text" id="nombre" class="form-control" max="80" placeholder="Digíte su nombre">
+                </div>
+
+                <div class="mb-3">
+                  <label for="tipo_documento" class="form-label h6">Tipo de documento</label>
+                  <select id="tipo_documento" class="form-select">
+                    <option></option>
+                    <option value="1">Tarjeta de identidad</option>
+                    <option value="2">Cedula de ciudadania</option>
+                    
+                  </select>
+                </div>
+
+                <div class="mb-3">
+                  <label for="numero_documento" class="form-label h6">Numero de documento</label>
+                  <input type="number" id="numero_documento" class="form-control" min="4" max="20" placeholder="Digíte número de documento">
+                </div>
+
                 <div class="mb-3">
                   <label for="edad" class="form-label h6">Edad</label>
                   <input type="number" id="edad" class="form-control" min="15" max="80" placeholder="Digíte su edad">
