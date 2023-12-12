@@ -1,30 +1,66 @@
+const formularioCalculadora = document.getElementById('formulario-calculadora');
+const resultado = document.getElementById('resultado');
+
+formularioCalculadora.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    procesarDatos();
+})
 
 
+function procesarDatos() {
+    //validación
 
-function calcularCalorias() {
-
-    const multiplicadorTMB = {
-        peso: 10,
-        altura: 6.25,
-        edad: 5
+    // obtener datos del formulario y enviarlos a la funcion calcularCalorias
+    const datos = {
+        nombre: document.getElementById('nombre').value,
+        tipoDocumento: document.getElementById('tipo_documento').value,
+        numeroDocumento: document.getElementById('numero_documento').value,
+        edad: document.getElementById('edad').value,
+        genero: document.querySelector('input[name="genero"]:checked').value,
+        peso: document.getElementById('peso').value,
+        altura: document.getElementById('altura').value,
+        actividad: document.getElementById('actividad').value,
+        kcal: 0
     }
 
-        //Formula hombres: valor actividad x (10 x peso en kg) + (6,25 × altura en cm) - (5 × edad en años) + 5
+    //verifica que los campos no esten vacios de lo contrario envia un mensaje
+    if (datos.nombre === '' || datos.tipoDocumento === '' || datos.numeroDocumento === '' || datos.edad === '' || datos.genero === '' || datos.peso === '' || datos.altura === '' || datos.actividad === '') {
+        alert('Por favor, complete todos los campos');
+    }else{
+        calcularCalorias(datos);
+    }
 
-        //Formula mujeres: valor actividad x (10 x peso en kg) + (6,25 × altura en cm) - (5 × edad en años) - 161
+}
 
-    
+function calcularCalorias(datos) {
+    aparecerResultado();
+
+    let calculoCalorias = datos.genero === 'M' ? (parseFloat( datos.actividad ))*(10 * datos.peso) + (6.25 * datos.altura) - (5 * datos.edad) + 5 : (parseFloat( datos.actividad ))*(10 * datos.peso) + (6.25 * datos.altura) - (5 * datos.edad) - 161;
+
+    console.log(datos);
+
+    //Formula hombres: valor actividad x (10 x peso en kg) + (6,25 × altura en cm) - (5 × edad en años) + 5
+
+
+    //Formula mujeres: valor actividad x (10 x peso en kg) + (6,25 × altura en cm) - (5 × edad en años) - 161
+
+
     // totalCalorias.value = `${Math.floor(calculoCalorias)} kcal`;
-    
+
     resultado.innerHTML = `
         <div class=" card-body d-flex flex-column justify-content-center align-items-center h-100" id="calculo">
             <h5 class="card-title h2">Calorías requeridas</h5>
             <div class="mb-3 w-100">
-                <input class="form-control text-center" value="${} kcal" style="font-size: 2rem" disabled>
+                <p class="form-control text-center" style="font-size: 2rem"> El paciente ${datos.nombre} identificado con el tipo de documento ${datos.tipoDocumento === '1' ? 'Tarjeta de identidad' : 'Cedula de ciudadania'} NO.${datos.numeroDocumento}, requiere un total de ${Math.floor(calculoCalorias)} kcal para el sostenimiento de su TBM.</p>
             </div>
         </div>
     `
-     // Volver a limpiar variables
+
+
+
+
+    // Volver a limpiar variables
 
 }
 
@@ -51,7 +87,7 @@ function mostrarMensajeDeError(msg) {
 function aparecerResultado() {
     resultado.style.top = '100vh';
     resultado.style.display = 'block';
-    
+
     let distancia = 100;
     let resta = 0.3;
     let id = setInterval(() => {
