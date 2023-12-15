@@ -19,3 +19,7 @@ el paciente dependiendo de su edad:
     - Entre 15 y 29 años: Joven.
     - Entre 30 y 59 años: adultos.
     - Entre 60 años en adelante: adultos mayores.
+
+## Integrantes 
+Santiago F. Estrada
+Santiago Paredes
